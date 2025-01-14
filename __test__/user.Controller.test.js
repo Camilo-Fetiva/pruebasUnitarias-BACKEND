@@ -33,7 +33,7 @@ describe(
                 it(
                     'Creacion de usuarios correcta',
                     async()=>{
-                        const res = await supertest(app).post('/usuarios').send(testUser)
+                        const res = await supertest(app).post('/usuarios/crear').send(testUser)
 
                     // DEFINIR QUE SE ESPERA DE LA RESPUESTA
                     expect(res.statusCode).toBe(201);
@@ -43,7 +43,7 @@ describe(
                 it(
                     'ERROR al faltar informacion',
                     async()=>{
-                        const res = await supertest(app).post('/usuarios').send({email:testUser.email})
+                        const res = await supertest(app).post('/usuarios/crear').send({email:testUser.email})
 
                         // DEFINIR QUE SE ESPERA DE LA RESPUESTA
                         expect(res.body).toHaveProperty('mensaje', 'Error al crear un usuario');
@@ -59,7 +59,7 @@ describe(
                 it(
                     'Deberia indicar que no hay usuarios almacenados',
                     async()=>{
-                        const res = await supertest(app).get('/usuarios');
+                        const res = await supertest(app).get('/usuarios/obtener');
                         expect(res.statusCode).toBe(200);
                         expect(res.body).toHaveProperty('mensaje', 'No hay usuarios en Ecocloset')
                     }
