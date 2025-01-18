@@ -66,5 +66,37 @@ describe(
                 )
             }
         )
+
+        // PUT
+        describe(
+            'Pruebas PUT para usuarios',
+            ()=>{
+                it(
+                    'Deberia decir que hay un error al ACTUALIZAR el usuario',
+                    async()=>{
+                        const res = await supertest(app).put('/usuarios/actualizar/:id');
+                        
+                        expect(res.statusCode).toBe(400);
+                        expect(res.body).toHaveProperty('mensaje', 'Ocurrio un error al actualizar el usuario')
+                    }
+                )
+            }
+        )
+
+        // DELETE
+        describe(
+            'Pruebas DELETE para usuarios',
+            ()=>{
+                it(
+                    'Deberia decir que hay un error al ELIMINAR el usuario',
+                    async()=>{
+                        const res = await supertest(app).delete('/usuarios/eliminar/:id');
+                        
+                        expect(res.statusCode).toBe(400);
+                        expect(res.body).toHaveProperty('mensaje', 'Ocurrio un error al eliminar el usuario')
+                    }
+                )
+            }
+        )
     }
 )
