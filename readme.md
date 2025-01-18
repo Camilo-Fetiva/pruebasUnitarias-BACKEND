@@ -1,10 +1,8 @@
 ## DESCRIPCION PRUEBAS UNITARIAS EN BACKEND
 
-Repostorio realizado para realizar pruebas unitarias con Supertest y Jest para operaciones CRUD de los controladores del Backedn del proyecto final de modulo de 300H
+Repostorio realizado para realizar pruebas unitarias con Supertest y Jest para operaciones CRUD de los controladores del Backend del proyecto final de modulo de 300H
 
 
 
-PROYECTO REALIZADO POR:
-    Camilo Fetiva 
-
-BOOTCAMP DE DESARROLLO WEB BIT 2024
+## AUTORES
+<br> Proyecto realizado por Camilo Fetiva para el Bootcamp de Desarrollo Web 2024 </br>
