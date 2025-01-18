@@ -93,6 +93,21 @@ describe(
                         expect(res.body).toHaveProperty('mensaje', 'Ocurrio un error al actualizar la vestimenta')
                     }
                 )
+
+                it(
+                    'Debería actualizar el producto', 
+                    async () => {
+                    await productModel.create(testProduct);
+                    
+                    const actualizarProducto = {
+                        Nombre: 'Vestido'
+                    };
+                
+                    const res = await supertest(app).put(`/productos/${testProduct._id}`).send(actualizarProducto);
+                
+                    expect(res.statusCode).toBe(200);
+                    expect(res.body).toHaveProperty('mensaje', 'Se actualizo la vestimenta correctamente');
+                });
             }
         )
 
