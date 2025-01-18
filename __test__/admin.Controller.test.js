@@ -21,7 +21,7 @@ describe(
 
         // PRUEBA DE PRODUCTO CREADO
         const testAdmin = {
-            Nombre: "Chaqueta",
+            Nombre: "Pepe",
             Correo: "pepe@admin",
             Telefono: 1234455,
             Contrasena: "djhfsdjfh", 
@@ -92,6 +92,41 @@ describe(
                         expect(res.body).toHaveProperty('mensaje', 'Ocurrio un error al actualizar el administrador')
                     }
                 )
+
+                it(
+                    'Deberia actualizar el administrador',
+                    async () => {
+                        // CREAR EL ADMINISTRADOR
+                        const newAdmin = (await adminModel.create(testAdmin)).save();
+
+                        // CAMBIAR UN DATO
+                        const updatedAdmin = { ...testAdmin, Nombre: 'Joe' };
+
+                        const res = await supertest(app).put('/administrador/actualizar/' + (await newAdmin).id).send(updatedAdmin);
+
+                        expect(res.statusCode).toBe(200);
+                        expect(res.body).toHaveProperty('mensaje', 'Se actualizo el administrador correctamente')
+                    }
+                )
+
+                it(
+                    'No deberia encontrar un administrador para actualizar',
+                    async () => {
+                        // CREAR EL ADMINISTRADOR
+                        const newAdmin = (await adminModel.create(testAdmin)).save();
+
+                        // CAMBIAR EL ID DEL ADMINISTRADOR
+                        const idAdmin = '673ffb2b5ea00ead048d0327';
+
+                        // CAMBIAR UN DATO
+                        const updatesAdmin = { ...testAdmin, Nombre: 'Joe' };
+
+                        const res = await supertest(app).put('/administrador/actualizar/' + idAdmin).send(updatesAdmin);
+
+                        expect(res.statusCode).toBe(404);
+                        expect(res.body).toHaveProperty('mensaje', 'No se encontro administrador para actualizar')
+                    }
+                )
             }
         )
 
@@ -106,6 +141,19 @@ describe(
                         
                         expect(res.statusCode).toBe(400);
                         expect(res.body).toHaveProperty('mensaje', 'Ocurrio un error al eliminar el administrador')
+                    }
+                )
+
+                it(
+                    'Deberia eliminar el administrador',
+                    async () => {
+                        // CREAR EL ADMINISTRADOR
+                        const newAdmin = (await adminModel.create(testAdmin)).save();
+
+                        const res = await supertest(app).delete('/administrador/eliminar/' + (await newAdmin).id);
+
+                        expect(res.statusCode).toBe(200);
+                        expect(res.body).toHaveProperty('mensaje', 'Administrador eliminado satisfactoriamente')
                     }
                 )
             }
